@@ -1,0 +1,14 @@
+{
+    "name": "integration-helper/integration-version",
+    "description": "Integration Helper with Version Data",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "IntegrationHelper\\IntegrationVersion\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
