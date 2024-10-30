@@ -30,7 +30,6 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         $dateTimeNow = $dateTime->getNow();
         $getter = Context::getInstance()->getGetterParentItemCollection();
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
-        $repository->updateAll(['status' => IntegrationVersionItemInterface::STATUS_PROCESS]);
         $items = $getter->getItem($table, $identityColumn, $identityValue, $columns);
 
         if($items->count()) {
@@ -72,7 +71,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         $dateTimeNow = $dateTime->getNow();
         $getter = Context::getInstance()->getGetterParentItemCollection();
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
-        $repository->updateAll(['status' => IntegrationVersionItemInterface::STATUS_PROCESS]);
+        $repository->updateAll(['status' => IntegrationVersionItemInterface::STATUS_PROCESS], $parentId);
         $page = 1;
         while(true) {
             $items = $getter->getItems($table, $identityColumn, $columns, $page++, $limit);
