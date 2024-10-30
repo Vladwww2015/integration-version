@@ -3,13 +3,13 @@
     "description": "Integration Helper with Version Data",
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "integration-helper/integration-version": "v1.0.4"
+        "php": "^8.2"
     },
     "autoload": {
         "psr-4": {
             "IntegrationHelper\\IntegrationVersion\\": "src/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "version": "1.0.5"
 }
