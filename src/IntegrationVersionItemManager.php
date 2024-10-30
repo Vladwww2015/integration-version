@@ -142,6 +142,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
             if($integrationVersionItem->getChecksum() !== $checksum) {
                 $dataToUpdate[] = [
                     'identity_value' => $identityValue,
+                    'parent_id' => $parentId,
                     'checksum' => $checksum,
                     'status' => IntegrationVersionItemInterface::STATUS_SUCCESS,
                     'version_hash' => $newHash,
@@ -153,6 +154,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
 
             if($integrationVersionItem->getChecksum() === $checksum) {
                 $dataChecked[] = [
+                    'parent_id' => $parentId,
                     'identity_value' => $identityValue,
                     'status' => IntegrationVersionItemInterface::STATUS_SUCCESS,
                 ];
