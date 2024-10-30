@@ -44,9 +44,10 @@ interface IntegrationVersionItemRepositoryInterface
 
     /***
      * @param array $values
+     * @param int $parentId
      * @return mixed
      */
-    public function updateAll(array $values): IntegrationVersionItemRepositoryInterface;
+    public function updateAll(array $values, int $parentId): IntegrationVersionItemRepositoryInterface;
 
     /**
      * @param int $parentId
