@@ -10,8 +10,8 @@ interface IntegrationVersionItemInterface
 
     public const STATUS_DELETED = 'deleted';
 
-    public function getId(): int;
-    public function setId(int $id): IntegrationVersionItemInterface;
+    public function getIdValue(): int;
+    public function setIdValue(int $id): IntegrationVersionItemInterface;
 
     public function getParentId(): int;
     public function setParentId(int $parentId): IntegrationVersionItemInterface;

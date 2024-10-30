@@ -12,8 +12,8 @@ interface IntegrationVersionInterface
 
     public const STATUS_FAILED = 'failed'; //It means cur integration version pending reindex process with checksums and hash and disabled to import/export
 
-    public function getId(): int;
-    public function setId(int $id): IntegrationVersionInterface;
+    public function getIdValue(): int;
+    public function setIdValue(int $id): IntegrationVersionInterface;
 
     public function getSource(): string;
     public function setSource(string $source): IntegrationVersionInterface;
