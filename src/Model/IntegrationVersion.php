@@ -15,12 +15,12 @@ class IntegrationVersion implements IntegrationVersionInterface
     private $status = '';
     private $updated_at = '';
 
-    public function getId(): int
+    public function getIdValue(): int
     {
         return (int) $this->id;
     }
 
-    public function setId(int $id): IntegrationVersionInterface
+    public function setIdValue(int $id): IntegrationVersionInterface
     {
         $this->id = $id;
 

@@ -16,14 +16,14 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
     {
         $repository = Context::getInstance()->getIntegrationVersionRepository();
         $item = $repository->getItemBySource($source);
-        if(!$item->getId()) throw new IntegrationVersionNotFound($source);
+        if(!$item->getIdValue()) throw new IntegrationVersionNotFound($source);
 
         $hash = Context::getInstance()->getHashGenerator()->generate($source);
 
         try {
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeOne(
-                    $item->getId(),
+                    $item->getIdValue(),
                     $item->getTableName(),
                     $item->getIdentityColumn(),
                     $identityValue,
@@ -52,14 +52,14 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         $this->setProcessStatus($source);
         $repository = Context::getInstance()->getIntegrationVersionRepository();
         $item = $repository->getItemBySource($source);
-        if(!$item->getId()) throw new IntegrationVersionNotFound($source);
+        if(!$item->getIdValue()) throw new IntegrationVersionNotFound($source);
 
         $hash = Context::getInstance()->getHashGenerator()->generate($source);
 
         try {
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeFull(
-                    $item->getId(),
+                    $item->getIdValue(),
                     $item->getTableName(),
                     $item->getIdentityColumn(),
                     $item->getChecksumColumns(),
@@ -93,7 +93,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
     {
         $dateTime = Context::getInstance()->getDateTime();
         $item = $this->getItem($source);
-        if(!$item->getId()) {
+        if(!$item->getIdValue()) {
             $item = $this->createItem([
                 'source' => $source,
                 'table_name' => $table,
