@@ -37,8 +37,9 @@
     );
 ```
 
-#### 3. After Import Or Updated Data, just run build new version
+#### 3. After Import Or Updated Data, just run build new version. 
 ```
+Full Reindex: 
     $source = 'products';
     $limit = 5000;
 
@@ -46,6 +47,12 @@
     $manager = Context::getIntegrationVersionManager();
     $manager->executeFull($source, $limit); //This process Get Items from IntegrationHelper\IntegrationVersion\GetterParentItemCollectionInterface,
      compare checksum and update hash and checksum
+```
+```
+Reindex For One Item: 
+    $source = 'products';
+    $manager = Context::getIntegrationVersionManager();
+    $manager->executeOne($source, $identityValue);
 ```
 
 #### 4. Get Identities For Update
