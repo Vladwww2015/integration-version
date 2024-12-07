@@ -22,7 +22,7 @@ interface IntegrationVersionInterface
     public function setTableName(string $tableName): IntegrationVersionInterface;
 
     public function getHash(): string;
-    public function setHash(string $hash): IntegrationVersionInterface;
+    public function setHash(string $hash, string $dateTime): IntegrationVersionInterface;
 
     public function getIdentityColumn(): string;
     public function setIdentityColumn(string $identityColumn): IntegrationVersionInterface;
@@ -34,5 +34,11 @@ interface IntegrationVersionInterface
     public function setChecksumColumns(array $columns): IntegrationVersionInterface;
 
     public function getUpdatedAtValue(): string;
+
     public function setUpdatedAtValue(string $updatedAt): IntegrationVersionInterface;
+
+    /**
+     * @return string
+     */
+    public function getHashDateTime(): string;
 }

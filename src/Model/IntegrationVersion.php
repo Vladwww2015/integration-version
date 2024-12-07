@@ -2,7 +2,6 @@
 
 namespace IntegrationHelper\IntegrationVersion\Model;
 
-use IntegrationHelper\IntegrationVersion\Model\IntegrationVersionInterface;
 
 class IntegrationVersion implements IntegrationVersionInterface
 {
@@ -14,6 +13,7 @@ class IntegrationVersion implements IntegrationVersionInterface
     private $table_name = '';
     private $status = '';
     private $updated_at = '';
+    private $hash_date_time = '';
 
     public function getIdValue(): int
     {
@@ -56,9 +56,10 @@ class IntegrationVersion implements IntegrationVersionInterface
         return $this->hash;
     }
 
-    public function setHash(string $hash): IntegrationVersionInterface
+    public function setHash(string $hash, string $dateTime): IntegrationVersionInterface
     {
         $this->hash = $hash;
+        $this->setHashDateTime($dateTime);
 
         return $this;
     }
@@ -111,6 +112,21 @@ class IntegrationVersion implements IntegrationVersionInterface
         $this->checksum_columns = $columns;
 
         return $this;
+    }
+
+    protected function setHashDateTime(string $hashDateTime): IntegrationVersionInterface
+    {
+        $this->hash_date_time = $hashDateTime;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashDateTime(): string
+    {
+        return $this->hash_date_time;
     }
 }
 

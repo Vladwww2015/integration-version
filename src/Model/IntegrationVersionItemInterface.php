@@ -21,7 +21,7 @@ interface IntegrationVersionItemInterface
     public function setStatus(string $status): IntegrationVersionItemInterface;
 
     public function getVersionHash(): string;
-    public function setVersionHash(string $versionHash): IntegrationVersionItemInterface;
+    public function setVersionHash(string $versionHash, string $hashDateTime): IntegrationVersionItemInterface;
 
     public function getIdentityValue(): string;
     public function setIdentityValue(string $identityValue): IntegrationVersionItemInterface;
@@ -31,4 +31,9 @@ interface IntegrationVersionItemInterface
 
     public function getUpdatedAtValue(): string;
     public function setUpdatedAtValue(string $updatedAt): IntegrationVersionItemInterface;
+
+    /**
+     * @return string
+     */
+    public function getHashDateTime(): string;
 }

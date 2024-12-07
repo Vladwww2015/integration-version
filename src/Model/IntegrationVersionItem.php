@@ -2,8 +2,6 @@
 
 namespace IntegrationHelper\IntegrationVersion\Model;
 
-use IntegrationHelper\IntegrationVersion\Model\IntegrationVersionItemInterface;
-
 class IntegrationVersionItem implements IntegrationVersionItemInterface
 {
     private $id;
@@ -12,6 +10,7 @@ class IntegrationVersionItem implements IntegrationVersionItemInterface
     private $version_hash = '';
     private $checksum = '';
     private $updated_at = '';
+    private $hash_date_time = '';
     private $status = '';
 
     public function getIdValue(): int
@@ -44,9 +43,10 @@ class IntegrationVersionItem implements IntegrationVersionItemInterface
         return $this->version_hash;
     }
 
-    public function setVersionHash(string $versionHash): IntegrationVersionItemInterface
+    public function setVersionHash(string $versionHash, string $hashDateTime): IntegrationVersionItemInterface
     {
         $this->version_hash = $versionHash;
+        $this->setHashDateTime($hashDateTime);
 
         return $this;
     }
@@ -97,5 +97,20 @@ class IntegrationVersionItem implements IntegrationVersionItemInterface
         $this->parent_id = $parentId;
 
         return $this;
+    }
+
+    protected function setHashDateTime(string $hashDateTime): IntegrationVersionItemInterface
+    {
+        $this->hash_date_time = $hashDateTime;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHashDateTime(): string
+    {
+        return $this->hash_date_time;
     }
 }

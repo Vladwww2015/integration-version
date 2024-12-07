@@ -14,6 +14,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
      * @param mixed $identityValue
      * @param array $columns
      * @param string $newHash
+     * @param string $hashDateTime
      * @return IntegrationVersionResultOutput
      */
     public function executeOne(
@@ -22,18 +23,17 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         string $identityColumn,
         mixed $identityValue,
         array $columns,
-        string $newHash
+        string $newHash,
+        string $hashDateTime
     ): IntegrationVersionResultOutput
     {
         $resultFlag = false;
-        $dateTime = Context::getInstance()->getDateTime();
-        $dateTimeNow = $dateTime->getNow();
         $getter = Context::getInstance()->getGetterParentItemCollection();
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
         $items = $getter->getItem($table, $identityColumn, $identityValue, $columns);
 
         if($items->count()) {
-            if($this->execute($parentId, $items, $repository, $identityColumn, $columns, $newHash, $dateTimeNow)) {
+            if($this->execute($parentId, $items, $repository, $identityColumn, $columns, $newHash, $hashDateTime)) {
                 $resultFlag = true;
             }
         }
@@ -62,13 +62,12 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         string $identityColumn,
         array $columns,
         string $newHash,
+        string $hashDateTime,
         int $limit = 10000,
         \Closure $isMustBeStoppedCallback = null
     ): IntegrationVersionResultOutput
     {
         $resultFlag = false;
-        $dateTime = Context::getInstance()->getDateTime();
-        $dateTimeNow = $dateTime->getNow();
         $getter = Context::getInstance()->getGetterParentItemCollection();
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
         $repository->updateAll(['status' => IntegrationVersionItemInterface::STATUS_PROCESS], $parentId);
@@ -80,7 +79,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
 
             if(!$items->count()) break;
 
-            if($this->execute($parentId, $items, $repository, $identityColumn, $columns, $newHash, $dateTimeNow)) {
+            if($this->execute($parentId, $items, $repository, $identityColumn, $columns, $newHash, $hashDateTime)) {
                 $resultFlag = true;
             }
         }
@@ -110,7 +109,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         string $identityColumn,
         array $columns,
         string $newHash,
-        string $dateTimeNow
+        string $hashDateTime
     ): bool  {
         $resultFlag = false;
         $dataChecked = $dataToCreate = $dataToUpdate = [];
@@ -133,7 +132,8 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
                     'version_hash' => $newHash,
                     'identity_value' => $identityValue,
                     'checksum' => $checksum,
-                    'updated_at' => $dateTimeNow
+                    'updated_at' => $hashDateTime,
+                    'hash_date_time' => $hashDateTime
                 ];
                 $resultFlag = true;
                 continue;
@@ -145,7 +145,8 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
                     'checksum' => $checksum,
                     'status' => IntegrationVersionItemInterface::STATUS_SUCCESS,
                     'version_hash' => $newHash,
-                    'updated_at' => $dateTimeNow
+                    'hash_date_time' => $hashDateTime,
+                    'updated_at' => $hashDateTime
                 ];
                 $resultFlag = true;
                 continue;

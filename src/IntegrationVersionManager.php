@@ -21,6 +21,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         $hash = Context::getInstance()->getHashGenerator()->generate($source);
 
         try {
+            $hashDateTime = Context::getInstance()->getDateTime()->getNow();
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeOne(
                     $item->getIdValue(),
@@ -28,11 +29,12 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                     $item->getIdentityColumn(),
                     $identityValue,
                     $item->getChecksumColumns(),
-                    $hash
+                    $hash,
+                    $hashDateTime
                 );
 
             if($result->getResult()) {
-                $item->setHash($hash);
+                $item->setHash($hash, $hashDateTime);
                 $repository->updateItem($item);
             }
 
@@ -57,6 +59,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         $hash = Context::getInstance()->getHashGenerator()->generate($source);
 
         try {
+            $hashDateTime = Context::getInstance()->getDateTime()->getNow();
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeFull(
                     $item->getIdValue(),
@@ -64,6 +67,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                     $item->getIdentityColumn(),
                     $item->getChecksumColumns(),
                     $hash,
+                    $hashDateTime,
                     $limit,
                     function (int $parentId) {
                         return $this->isIndexMustBeStopped($parentId);
@@ -71,7 +75,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                 );
 
             if($result->getResult()) {
-                $item->setHash($hash);
+                $item->setHash($hash, $hashDateTime);
                 $repository->updateItem($item);
             }
 
