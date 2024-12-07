@@ -2,13 +2,8 @@
 
 namespace IntegrationHelper\IntegrationVersion;
 
-use IntegrationHelper\IntegrationVersion\HashGeneratorInterface;
 use IntegrationHelper\IntegrationVersion\Repository\IntegrationVersionItemRepositoryInterface;
-use IntegrationHelper\IntegrationVersion\DateTimeInterface;
-use IntegrationHelper\IntegrationVersion\GetterParentItemCollectionInterface;
-use IntegrationHelper\IntegrationVersion\IntegrationVersionItemManagerInterface;
 use IntegrationHelper\IntegrationVersion\Repository\IntegrationVersionRepositoryInterface;
-use IntegrationHelper\IntegrationVersion\IntegrationVersionManagerInterface;
 
 class Context
 {

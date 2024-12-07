@@ -91,7 +91,6 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         array $checksumColumns
     ): IntegrationVersionInterface
     {
-        $dateTime = Context::getInstance()->getDateTime();
         $item = $this->getItem($source);
         if(!$item->getIdValue()) {
             $item = $this->createItem([
@@ -99,7 +98,6 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                 'table_name' => $table,
                 'identity_column' => $identityColumn,
                 'checksum_columns' => $checksumColumns,
-                'updated_at' => $dateTime->getNow(),
                 'status' => IntegrationVersionInterface::STATUS_READY
             ]);
 
@@ -109,8 +107,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
             ->setSource($source)
             ->setTableName($table)
             ->setIdentityColumn($identityColumn)
-            ->setChecksumColumns($checksumColumns)
-            ->setUpdatedAtValue($dateTime->getNow());
+            ->setChecksumColumns($checksumColumns);
 
         $this->updateItem($item);
 
