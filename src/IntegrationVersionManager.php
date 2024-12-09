@@ -159,7 +159,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
     ): array {
         $item = $this->getItem($source);
         return Context::getInstance()->getIntegrationVersionItemManager()
-            ->getDeletedIdentities($item->getIdValue(), $identities, $item->getIdentityColumn());
+            ->getDeletedIdentities($item->getIdValue(), $identities, 'identity_value');
     }
 
     protected function checkReadyToProcessStatus(string $source)
