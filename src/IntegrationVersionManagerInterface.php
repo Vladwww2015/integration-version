@@ -19,4 +19,9 @@ interface IntegrationVersionManagerInterface
 
     public function setPendingStatus(string $source): void;
 
+    public function getDeletedIdentities(
+        string $source,
+        array $identities
+    ): array;
+
 }

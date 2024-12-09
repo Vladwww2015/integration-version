@@ -22,12 +22,20 @@ interface IntegrationVersionItemRepositoryInterface
     /**
      * @param int $parentId
      * @param string $oldExternalHash
-     * @param string $updatedAt
+     * @param string $oldHashDateTime
      * @param int $page
      * @param int $limit
      * @return array
      */
-    public function getIdentitiesForNewestVersions(int $parentId, string $oldExternalHash, string $updatedAt, int $page = 1, int $limit = 10000): iterable;
+    public function getIdentitiesForNewestVersions(int $parentId, string $oldExternalHash, string $oldHashDateTime, int $page = 1, int $limit = 10000): iterable;
+
+    /**
+     * @param int $parentId
+     * @param array $identitiesForCheck
+     * @param string $identityColumn
+     * @return array
+     */
+    public function getDeletedIdentities(int $parentId, array $identitiesForCheck, string $identityColumn): array;
 
     /**
      * @param array $values

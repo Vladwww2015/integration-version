@@ -61,15 +61,15 @@ Reindex For One Item:
     $oldHash = {requestObject}->getParam('previous_hash');
     $page = {requestObject}->getParam('page');
     $limit = {requestObject}->getParam('limit');
-    $updatedAt = {requestObject}->getParam('updated_at');
+    $hashDateTime = {requestObject}->getParam('hash_date_time');
 
     $manager = Context::getIntegrationVersionItemManager();
-    $identities = $manager->getIdentitiesForNewestVersions($source, $oldHash, $updatedAt, $page, $limit);
+    $identities = $manager->getIdentitiesForNewestVersions($source, $oldHash, $hashDateTime, $page, $limit);
     ....
     get Data from table or via collection by identity_column in ($identities) and return in response
 ```
 
-### Algorithm for Context::getIntegrationVersionItemManager()->getIdentitiesForNewestVersions($source, $oldHash, $updatedAt, $page, $limit) 
+### Algorithm for Context::getIntegrationVersionItemManager()->getIdentitiesForNewestVersions($source, $oldHash, $hashDateTime, $page, $limit) 
 ```
-    Get Identities for items which newest than $updatedAt and with hash not eq $oldHash
+    Get Identities for items which newest than $hashDateTime and with hash not eq $oldHash
 ```

@@ -2,13 +2,10 @@
 
 namespace IntegrationHelper\IntegrationVersion;
 
-use IntegrationHelper\IntegrationVersion\Context;
 use IntegrationHelper\IntegrationVersion\Exceptions\IntegrationVersionIsReady;
 use IntegrationHelper\IntegrationVersion\Exceptions\IntegrationVersionProcess;
 use IntegrationHelper\IntegrationVersion\Exceptions\IntegrationVersionNotFound;
-use IntegrationHelper\IntegrationVersion\IntegrationVersionResultOutput;
 use IntegrationHelper\IntegrationVersion\Model\IntegrationVersionInterface;
-use IntegrationHelper\IntegrationVersion\IntegrationVersionManagerInterface;
 
 class IntegrationVersionManager implements IntegrationVersionManagerInterface
 {
@@ -154,6 +151,15 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         $item = $this->getItem($source);
         $item->setStatus(IntegrationVersionInterface::STATUS_READY);
         $this->updateItem($item);
+    }
+
+    public function getDeletedIdentities(
+        string $source,
+        array $identities
+    ): array {
+        $item = $this->getItem($source);
+        return Context::getInstance()->getIntegrationVersionItemManager()
+            ->getDeletedIdentities($item->getIdValue(), $identities, $item->getIdentityColumn());
     }
 
     protected function checkReadyToProcessStatus(string $source)

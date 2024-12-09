@@ -201,10 +201,27 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         $repository->deleteByIds($ids);
     }
 
-    public function getIdentitiesForNewestVersions(int $parentId, string $oldExternalHash, string $updatedAt, int $page = 1, int $limit = 10000): iterable
+    public function getIdentitiesForNewestVersions(int $parentId, string $oldExternalHash, string $oldHashDateTime, int $page = 1, int $limit = 10000): iterable
     {
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
 
-        return $repository->getIdentitiesForNewestVersions($parentId, $oldExternalHash, $updatedAt, $page, $limit);
+        return $repository->getIdentitiesForNewestVersions($parentId, $oldExternalHash, $oldHashDateTime, $page, $limit);
+    }
+
+    /**
+     * @param int $parentId
+     * @param array $identitiesForCheck
+     * @param string $identityColumn
+     * @return array
+     */
+    public function getDeletedIdentities(
+        int $parentId,
+        array $identitiesForCheck,
+        string $identityColumn
+    ): array
+    {
+        $repository = Context::getInstance()->getIntegrationVersionItemRepository();
+
+        return $repository->getDeletedIdentities($parentId, $identitiesForCheck, $identityColumn);
     }
 }
