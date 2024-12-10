@@ -24,4 +24,11 @@ interface IntegrationVersionManagerInterface
         array $identities
     ): array;
 
+    /**
+     * @param string $source
+     * @param string $hash
+     * @param string $hashDateTime
+     * @return void
+     */
+    public function saveNewHash(string $source, string $hash, string $hashDateTime): void;
 }

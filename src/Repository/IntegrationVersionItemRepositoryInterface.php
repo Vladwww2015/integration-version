@@ -62,4 +62,9 @@ interface IntegrationVersionItemRepositoryInterface
      * @return IntegrationVersionItemRepositoryInterface
      */
     public function setStatusDeletedIfNotSuccess(int $parentId): IntegrationVersionItemRepositoryInterface;
+
+    /**
+     * @return iterable
+     */
+    public function getItemsWithDeletedStatus(): iterable;
 }

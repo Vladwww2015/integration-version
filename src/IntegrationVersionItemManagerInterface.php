@@ -73,4 +73,9 @@ interface IntegrationVersionItemManagerInterface
         array $identitiesForCheck,
         string $identityColumn
     ): array;
+
+    /**
+     * @return iterable
+     */
+    public function getItemsWithDeletedStatus(): iterable;
 }

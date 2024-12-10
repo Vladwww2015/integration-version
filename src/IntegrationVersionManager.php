@@ -31,8 +31,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                 );
 
             if($result->getResult()) {
-                $item->setHash($hash, $hashDateTime);
-                $repository->updateItem($item);
+                $this->saveNewHash($source, $hash, $hashDateTime);
             }
 
             $this->setReadyStatus($source);
@@ -72,8 +71,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
                 );
 
             if($result->getResult()) {
-                $item->setHash($hash, $hashDateTime);
-                $repository->updateItem($item);
+                $this->saveNewHash($source, $hash, $hashDateTime);
             }
 
             $this->setReadyStatus($source);
@@ -160,6 +158,13 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         $item = $this->getItem($source);
         return Context::getInstance()->getIntegrationVersionItemManager()
             ->getDeletedIdentities($item->getIdValue(), $identities, 'identity_value');
+    }
+
+    public function saveNewHash(string $source, string $hash, string $hashDateTime): void
+    {
+        $item = $this->getItem($source);
+        $item->setHash($hash, $hashDateTime);
+        $this->updateItem($item);
     }
 
     protected function checkReadyToProcessStatus(string $source)

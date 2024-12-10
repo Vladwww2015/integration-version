@@ -224,4 +224,11 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
 
         return $repository->getDeletedIdentities($parentId, $identitiesForCheck, $identityColumn);
     }
+
+    public function getItemsWithDeletedStatus(): iterable
+    {
+        $repository = Context::getInstance()->getIntegrationVersionItemRepository();
+
+        return $repository->getItemsWithDeletedStatus();
+    }
 }
