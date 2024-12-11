@@ -63,7 +63,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
         array $columns,
         string $newHash,
         string $hashDateTime,
-        int $limit = 10000,
+        int $limit = 50000,
         \Closure $isMustBeStoppedCallback = null
     ): IntegrationVersionResultOutput
     {

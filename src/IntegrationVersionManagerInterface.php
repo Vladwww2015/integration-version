@@ -6,7 +6,7 @@ use IntegrationHelper\IntegrationVersion\Model\IntegrationVersionInterface;
 
 interface IntegrationVersionManagerInterface
 {
-    public function executeFull(string $source, int $limit = 10000): IntegrationVersionResultOutput;
+    public function executeFull(string $source, int $limit = 50000): IntegrationVersionResultOutput;
 
     public function executeOne(string $source, mixed $identityValue): IntegrationVersionResultOutput;
 

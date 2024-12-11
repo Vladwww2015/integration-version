@@ -43,7 +43,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
         return $result;
     }
 
-    public function executeFull(string $source, int $limit = 10000): IntegrationVersionResultOutput
+    public function executeFull(string $source, int $limit = 50000): IntegrationVersionResultOutput
     {
         $this->checkReadyToProcessStatus($source);
 

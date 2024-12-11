@@ -41,7 +41,7 @@
 ```
 Full Reindex: 
     $source = 'products';
-    $limit = 5000;
+    $limit = 50000;
 
     $manager->setPendingStatus($source);
     $manager = Context::getIntegrationVersionManager();
