@@ -61,7 +61,6 @@ interface IntegrationVersionItemManagerInterface
      * @return array
      */
     public function getIdentitiesForNewestVersions(
-        string $sourceCode,
         int $parentId,
         string $oldExternalHash,
         string $oldHashDateTime,
