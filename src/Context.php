@@ -21,7 +21,9 @@ class Context
 
     protected $hashGenerator;
 
-    protected $getterParentItemCollection;
+    protected array $getterParentItemCollections = [];
+
+    protected $defaultGetterParentItemCollection;
 
     private function __construct()
     {}
@@ -42,9 +44,11 @@ class Context
         return $this;
     }
 
-    public function setGetterParentItemCollection(GetterParentItemCollectionInterface $getterParentItemCollection)
+    public function setGetterParentItemCollection(string $sourceCode, GetterParentItemCollectionInterface $getterParentItemCollection)
     {
-        $this->getterParentItemCollection = $getterParentItemCollection;
+        if($sourceCode === 'default_getter_parent_item_collection') $this->defaultGetterParentItemCollection = $getterParentItemCollection;
+
+        $this->getterParentItemCollections[$sourceCode] = $getterParentItemCollection;
 
         return $this;
     }
@@ -112,10 +116,9 @@ class Context
         return $this->dateTime;
     }
 
-
-    public function getGetterParentItemCollection(): GetterParentItemCollectionInterface
+    public function getGetterParentItemCollection(string $sourceCode): GetterParentItemCollectionInterface
     {
-        return $this->getterParentItemCollection;
+        return $this->getterParentItemCollections[$sourceCode] ?? $this->defaultGetterParentItemCollection;
     }
 
     public function getHashGenerator(): HashGeneratorInterface

@@ -8,6 +8,7 @@ use IntegrationHelper\IntegrationVersion\Repository\IntegrationVersionItemReposi
 class IntegrationVersionItemManager implements IntegrationVersionItemManagerInterface
 {
     /**
+     * @param string $sourceCode
      * @param int $parentId
      * @param string $table
      * @param string $identityColumn
@@ -18,6 +19,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
      * @return IntegrationVersionResultOutput
      */
     public function executeOne(
+        string $sourceCode,
         int $parentId,
         string $table,
         string $identityColumn,
@@ -28,7 +30,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
     ): IntegrationVersionResultOutput
     {
         $resultFlag = false;
-        $getter = Context::getInstance()->getGetterParentItemCollection();
+        $getter = Context::getInstance()->getGetterParentItemCollection($sourceCode);
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
         $items = $getter->getItem($table, $identityColumn, $identityValue, $columns);
 
@@ -47,16 +49,19 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
     }
 
     /**
+     * @param string $sourceCode
      * @param int $parentId
      * @param string $table
      * @param string $identityColumn
      * @param array $columns
      * @param string $newHash
+     * @param string $hashDateTime
      * @param int $limit
      * @param \Closure|null $isMustBeStoppedCallback
      * @return IntegrationVersionResultOutput
      */
     public function executeFull(
+        string $sourceCode,
         int $parentId,
         string $table,
         string $identityColumn,
@@ -68,7 +73,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
     ): IntegrationVersionResultOutput
     {
         $resultFlag = false;
-        $getter = Context::getInstance()->getGetterParentItemCollection();
+        $getter = Context::getInstance()->getGetterParentItemCollection($sourceCode);
         $repository = Context::getInstance()->getIntegrationVersionItemRepository();
         $repository->updateAll(['status' => IntegrationVersionItemInterface::STATUS_PROCESS], $parentId);
         $page = 1;

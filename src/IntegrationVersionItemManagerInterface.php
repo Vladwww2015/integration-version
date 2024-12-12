@@ -7,16 +7,19 @@ use IntegrationHelper\IntegrationVersion\IntegrationVersionResultOutput;
 interface IntegrationVersionItemManagerInterface
 {
     /**
+     * @param string $sourceCode
      * @param int $parentId
      * @param string $table
      * @param string $identityColumn
      * @param array $columns
      * @param string $newHash
+     * @param string $hashDateTime
      * @param int $limit
      * @param \Closure|null $isMustBeStoppedCallback
-     * @return IntegrationVersionResultOutput
+     * @return \IntegrationHelper\IntegrationVersion\IntegrationVersionResultOutput
      */
     public function executeFull(
+        string $sourceCode,
         int $parentId,
         string $table,
         string $identityColumn,
@@ -28,15 +31,18 @@ interface IntegrationVersionItemManagerInterface
     ): IntegrationVersionResultOutput;
 
     /**
+     * @param string $sourceCode
      * @param int $parentId
      * @param string $table
      * @param string $identityColumn
      * @param mixed $identityValue
      * @param array $columns
      * @param string $newHash
+     * @param string $hashDateTime
      * @return \IntegrationHelper\IntegrationVersion\IntegrationVersionResultOutput
      */
     public function executeOne(
+        string $sourceCode,
         int $parentId,
         string $table,
         string $identityColumn,
@@ -55,6 +61,7 @@ interface IntegrationVersionItemManagerInterface
      * @return array
      */
     public function getIdentitiesForNewestVersions(
+        string $sourceCode,
         int $parentId,
         string $oldExternalHash,
         string $oldHashDateTime,

@@ -21,6 +21,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
             $hashDateTime = Context::getInstance()->getDateTime()->getNow();
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeOne(
+                    $item->getSource(),
                     $item->getIdValue(),
                     $item->getTableName(),
                     $item->getIdentityColumn(),
@@ -58,6 +59,7 @@ class IntegrationVersionManager implements IntegrationVersionManagerInterface
             $hashDateTime = Context::getInstance()->getDateTime()->getNow();
             $result = Context::getInstance()->getIntegrationVersionItemManager()
                 ->executeFull(
+                    $item->getSource(),
                     $item->getIdValue(),
                     $item->getTableName(),
                     $item->getIdentityColumn(),

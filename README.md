@@ -14,7 +14,8 @@
 ```
     $context = IntegrationHelper\IntegrationVersion\Context::getInstance();
     $context->setDateTime($dateTime);
-    $context->setGetterParentItemCollection($getterParentItemCollection);
+    $context->setGetterParentItemCollection('default_getter_parent_item_collection', $defaultGetterParentItemCollection);
+    $context->setGetterParentItemCollection($sourceCode, $getterParentItemCollection);
     $context->setHashGenerator($hashGenerator);
     $context->setIntegrationVersionManager($integrationVersionManager);
     $context->setIntegrationVersionItemManager($integrationVersionItemManager);
