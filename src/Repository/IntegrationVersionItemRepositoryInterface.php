@@ -59,9 +59,10 @@ interface IntegrationVersionItemRepositoryInterface
 
     /**
      * @param int $parentId
+     * @param string $identityValue
      * @return IntegrationVersionItemRepositoryInterface
      */
-    public function setStatusDeletedIfNotSuccess(int $parentId): IntegrationVersionItemRepositoryInterface;
+    public function setStatusDeletedIfNotSuccess(int $parentId, string $identityValue = ''): IntegrationVersionItemRepositoryInterface;
 
     /**
      * @return iterable

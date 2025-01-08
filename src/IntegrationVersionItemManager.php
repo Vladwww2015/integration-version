@@ -40,7 +40,7 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
             }
         }
 
-        $repository->setStatusDeletedIfNotSuccess($parentId);
+        $repository->setStatusDeletedIfNotSuccess($parentId, $identityValue);
 
         $result = new IntegrationVersionResultOutput();
         $result->setResult($resultFlag);
