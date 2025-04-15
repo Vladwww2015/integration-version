@@ -191,14 +191,16 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
      */
     protected function callWrapQueryDb(string $method, array $data, int $i = 0)
     {
-        try {
-            $this->{$method}($data, $i);
-        } catch (\Exception $e) {
-            if($i++ > 5) throw $e;
+        foreach (array_chunk($data, 300) as $chunk) {
+            try{
+                $this->{$method}($chunk, $i);
+            } catch (\Exception $e) {
+                if($i++ > 5) throw $e;
 
-            sleep(5 * $i);
+                sleep(5 * $i);
 
-            $this->{$method}($data, $i);
+                $this->{$method}($chunk, $i);
+            }
         }
     }
 
