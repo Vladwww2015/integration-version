@@ -167,19 +167,39 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
             }
         }
 
-        if($dataToCreate) {
-            $this->createItems($dataToCreate);
+        if ($dataToCreate) {
+            $this->callWrapQueryDb('createItems', $dataToCreate);
         }
 
         if($dataToUpdate) {
-            $this->updateItems($dataToUpdate);
+            $this->callWrapQueryDb('updateItems', $dataToCreate);
         }
 
         if($dataChecked) {
-            $this->updateItems($dataChecked);
+            $this->callWrapQueryDb('updateItems', $dataChecked);
         }
 
         return $resultFlag;
+    }
+
+    /**
+     * @param string $method
+     * @param array $data
+     * @param int $i
+     * @return void
+     * @throws \Exception
+     */
+    protected function callWrapQueryDb(string $method, array $data, int $i = 0)
+    {
+        try {
+            $this->{$method}($data, $i);
+        } catch (\Exception $e) {
+            if($i++ > 5) throw $e;
+
+            sleep(5 * $i);
+
+            $this->{$method}($data, $i);
+        }
     }
 
     protected function getChecksum(array $columns, object $item): string
