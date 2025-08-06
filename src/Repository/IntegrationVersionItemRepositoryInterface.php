@@ -31,6 +31,14 @@ interface IntegrationVersionItemRepositoryInterface
 
     /**
      * @param int $parentId
+     * @param string $oldExternalHash
+     * @param string $oldHashDateTime
+     * @return int
+     */
+    public function getIdentitiesTotalForNewestVersions(int $parentId, string $oldExternalHash, string $oldHashDateTime): int;
+
+    /**
+     * @param int $parentId
      * @param array $identitiesForCheck
      * @param string $identityColumn
      * @return array

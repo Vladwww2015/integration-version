@@ -237,6 +237,23 @@ class IntegrationVersionItemManager implements IntegrationVersionItemManagerInte
 
     /**
      * @param int $parentId
+     * @param string $oldExternalHash
+     * @param string $oldHashDateTime
+     * @return int
+     */
+    public function getIdentitiesTotalForNewestVersions(
+        int $parentId,
+        string $oldExternalHash,
+        string $oldHashDateTime
+    ): int
+    {
+        $repository = Context::getInstance()->getIntegrationVersionItemRepository();
+
+        return $repository->getIdentitiesTotalForNewestVersions($parentId, $oldExternalHash, $oldHashDateTime);
+    }
+
+    /**
+     * @param int $parentId
      * @param array $identitiesForCheck
      * @param string $identityColumn
      * @return array

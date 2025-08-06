@@ -2,8 +2,9 @@
 
 namespace IntegrationHelper\IntegrationVersion;
 
-use IntegrationHelper\IntegrationVersion\IntegrationVersionResultOutput;
-
+/**
+ * @interface IntegrationVersionItemManagerInterface
+ */
 interface IntegrationVersionItemManagerInterface
 {
     /**
@@ -67,6 +68,18 @@ interface IntegrationVersionItemManagerInterface
         int $page = 1,
         int $limit = 50000
     ): iterable;
+
+    /**
+     * @param int $parentId
+     * @param string $oldExternalHash
+     * @param string $oldHashDateTime
+     * @return int
+     */
+    public function getIdentitiesTotalForNewestVersions(
+        int $parentId,
+        string $oldExternalHash,
+        string $oldHashDateTime
+    ): int;
 
     /**
      * @param int $parentId
